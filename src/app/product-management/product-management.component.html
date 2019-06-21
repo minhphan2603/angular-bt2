@@ -1,0 +1,41 @@
+<h1>Bài tập Strutural directive - CYBERSOFT</h1>
+<br>
+<div class="container p-0 mb-5">
+	<div class="bg-dark text-white p-2">
+		<p>Quản lý danh mục sản phẩm</p>
+	</div>
+
+	<div class="row border mx-0 py-5">
+		<div class="col-3"><input type="text" placeholder="MaSP" #masp></div>
+		<div class="col-3"><input type="text" placeholder="TenSP" #tensp></div>
+		<div class="col-3"><input type="text" placeholder="Gia" #gia></div>
+		<div class="col-3"><button class="btn btn-success" (click)="themSanPham(masp.value,tensp.value,gia.value)">Thêm
+				sản phẩm</button></div>
+	</div>
+</div>
+
+<div class="container p-0">
+	<div class="bg-dark text-white p-2">
+		<p>Danh mục sản phẩm</p>
+	</div>
+	<div class="container p-4 border">
+		<table class="w-100">
+			<tbody>
+				<tr class="border-top border-bottom py-5">
+					<th class="p-2">Mã SP</th>
+					<th>Tên SP</th>
+					<th>Giá</th>
+					<th></th>
+				</tr>
+				<tr [ngClass]="{'border-bottom': true, 'py-2': true, 'bg-secondary': i%2 === 0, 'text-white': i%2 === 0}" *ngFor="let item of ProductData | paginate: { itemsPerPage: 10, currentPage: p }; let i=index">
+					<td class="pl-2">{{item.MaSP}}</td>
+					<td>{{item.TenSP}}</td>
+					<td>{{item.Gia}}</td>
+					<td><button class="btn btn-danger" (click)="xoaSanPham(i)">Xóa</button></td>
+				</tr>
+			</tbody>
+			<pagination-controls (pageChange)="p = $event"></pagination-controls>
+		</table>
+		
+	</div>
+</div>
